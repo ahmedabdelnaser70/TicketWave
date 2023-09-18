@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using ticketWave.Data;
+
 namespace ticketWave
 {
     public class Program
@@ -8,6 +11,10 @@ namespace ticketWave
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDbContext<AppDbContext>(option =>
+            {
+                option.UseSqlServer(builder.Configuration.GetConnectionString("ticketWave"));
+            });
 
             var app = builder.Build();
 
