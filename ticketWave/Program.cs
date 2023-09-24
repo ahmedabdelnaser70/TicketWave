@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ticketWave.Data;
+using ticketWave.Data.Services;
 
 namespace ticketWave
 {
@@ -15,6 +16,9 @@ namespace ticketWave
             {
                 option.UseSqlServer(builder.Configuration.GetConnectionString("ticketWave"));
             });
+
+            //dependancy injection
+            builder.Services.AddScoped<IActorsService, ActorsService>();
 
             var app = builder.Build();
 
