@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using ticketWave.Data.Enums;
 
 namespace ticketWave.Models
@@ -15,16 +16,16 @@ namespace ticketWave.Models
         public MovieCategory MovieCategory { get; set; }
 
         //Relationships
-        public List<Actor_Movie> Actors_Movies { get; set; }
+        public ICollection<Actor_Movie> Actors_Movies { get; set; } = new HashSet<Actor_Movie>();
 
         //Cinema
         public int CinemaId { get; set; }
-        [ForeignKey("CinemaId")]
-        public Cinema Cinema { get; }
+        //[ForeignKey("CinemaId")]
+        public Cinema Cinema { get; set; }
 
         //Producer
         public int ProducerId { get; set; }
-        [ForeignKey("ProducerId")]
-        public Producer Producer { get; }
+        //[ForeignKey("ProducerId")]
+        public Producer Producer { get; set; }
     }
 }

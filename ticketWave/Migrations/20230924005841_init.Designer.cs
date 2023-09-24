@@ -12,8 +12,8 @@ using ticketWave.Data;
 namespace ticketWave.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230918040827_fix_name")]
-    partial class fix_name
+    [Migration("20230924005841_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
