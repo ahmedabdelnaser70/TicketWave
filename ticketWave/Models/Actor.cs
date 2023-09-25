@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using ticketWave.Data.Base;
 
 namespace ticketWave.Models
 {
-    public class Actor
+    public class Actor :IBaseEntity
     {
         [Key]
         public int Id { get; set; }
