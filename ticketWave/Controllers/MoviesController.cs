@@ -17,5 +17,13 @@ namespace ticketWave.Controllers
             var allMovies = await _service.GetAllAsync(n => n.Cinema);
             return View(allMovies);
         }
+
+        //Get: Movies/Details/1
+        public async Task<IActionResult> Details(int id)
+        {
+            var moviesDetails = await _service.GetMovieByIdAsync(id);
+            if (moviesDetails == null) return View("NotFound");
+            return View(moviesDetails);
+        }
     }
 }
