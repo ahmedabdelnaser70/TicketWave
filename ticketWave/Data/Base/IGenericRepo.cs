@@ -2,7 +2,7 @@
 
 namespace ticketWave.Data.Base
 {
-    public interface IGenericRepo<T> where T :class, IBaseEntity,  new()
+    public interface IGenericRepo<T> where T : BaseEntity,  new()
     {
         Task<IEnumerable<T>> GetAllAsync();
         Task<T> GetByIdAsync(int id);

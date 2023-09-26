@@ -1,9 +1,10 @@
 ﻿using Microsoft.Identity.Client;
 using System.ComponentModel.DataAnnotations;
+using ticketWave.Data.Base;
 
 namespace ticketWave.Models
 {
-    public class Producer
+    public class Producer :BaseEntity
     {
         public int Id { get; set; }
         [Display(Name = "Profile Picture")]

@@ -1,6 +1,6 @@
 ﻿namespace ticketWave.Data.Base
 {
-    public interface IBaseEntity
+    public class BaseEntity
     {
         public int Id { get; set; }
     }

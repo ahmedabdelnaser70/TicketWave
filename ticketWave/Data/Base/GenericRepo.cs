@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace ticketWave.Data.Base
 {
-    public class GenericRepo<T> : IGenericRepo<T> where T : class,IBaseEntity, new()
+    public class GenericRepo<T> : IGenericRepo<T> where T : BaseEntity, new()
     {
         private readonly AppDbContext _context;
         public GenericRepo(AppDbContext context)

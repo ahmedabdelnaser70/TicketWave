@@ -1,17 +1,17 @@
-﻿@model Actor
+﻿@model Producer
 
 @{
-    ViewData["Title"] = "Add a new Actor";
+    ViewData["Title"] = "Update Producer";
 }
 
 <div class="row text">
     <div class="col-md-8 offset-2">
         <p>
-            <h1>Add a New Actor</h1>
+            <h1>Update a New Producer</h1>
         </p>
         <div class="row">
             <div class="col-md-8 offset-2">
-                <form asp-action="Create">
+                <form asp-action="Edit">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                     <div class="form-group text-center">
@@ -34,7 +34,7 @@
                     </div>
 
                     <div class="form-group">
-                        <input type="submit" value="Create" class="btn btn-outline-success float-end" />
+                        <input type="submit" value="Update" class="btn btn-outline-success float-end" />
                         <a class="btn btn-outline-secondary" asp-action="Index">Show All</a>
                     </div>
                 </form>
@@ -46,10 +46,10 @@
 @section Scripts{ 
     <script>
 
-        $(document).ready(function () {
-            var output = document.getElementById('ProfilePicturePreview');
-            output.src = $("#ProfilePictureURL").val();
-        })
+        //$(document).ready(function () {
+        //    var output = document.getElementById('ProfilePicturePreview');
+        //    output.src = $("#ProfilePictureURL").val();
+        //})
 
         $("#ProfilePictureURL").on("change", function () {
             var output = document.getElementById('ProfilePicturePreview');

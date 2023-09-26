@@ -3,7 +3,7 @@ using ticketWave.Data.Base;
 
 namespace ticketWave.Models
 {
-    public class Actor :IBaseEntity
+    public class Actor :BaseEntity
     {
         [Key]
         public int Id { get; set; }

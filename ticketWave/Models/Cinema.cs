@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using ticketWave.Data.Base;
 
 namespace ticketWave.Models
 {
-    public class Cinema
+    public class Cinema : BaseEntity
     {
         public int Id { get; set; }
 

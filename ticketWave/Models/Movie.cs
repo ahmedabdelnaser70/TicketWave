@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using ticketWave.Data.Base;
 using ticketWave.Data.Enums;
 
 namespace ticketWave.Models
 {
-    public class Movie
+    public class Movie :BaseEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }
