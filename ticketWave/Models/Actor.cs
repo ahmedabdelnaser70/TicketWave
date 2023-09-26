@@ -14,7 +14,7 @@ namespace ticketWave.Models
 
         [Display(Name = "Full Name")]
         [Required(ErrorMessage = "Full Name is required")]
-        [StringLength(50,MinimumLength =3,ErrorMessage = "Full Name must be at least 3 character")]
+        [StringLength(50,MinimumLength =3,ErrorMessage = "Full Name must be at least 3 and 50 chars")]
         public string FullName { get; set; }
 
         [Display(Name = "Biography")]
