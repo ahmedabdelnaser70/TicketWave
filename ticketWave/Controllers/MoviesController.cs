@@ -18,6 +18,21 @@ namespace ticketWave.Controllers
             return View(allMovies);
         }
 
+        //Get: Movies/Create
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        //[HttpPost]
+        //public async Task<IActionResult> Create([Bind("Logo,Name,Description")] Cinema cinema)
+        //{
+        //    if (!ModelState.IsValid) return View(cinema);
+        //    await _service.AddAsync(cinema);
+        //    return RedirectToAction("Index");
+        //}
+
+
         //Get: Movies/Details/1
         public async Task<IActionResult> Details(int id)
         {
