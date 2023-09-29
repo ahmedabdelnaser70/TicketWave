@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ticketWave.Data.Services;
+using ticketWave.Data.ViewModels;
 using ticketWave.Models;
 
 namespace ticketWave.Controllers
@@ -29,13 +30,20 @@ namespace ticketWave.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Create([Bind("Logo,Name,Description")] Cinema cinema)
-        //{
-        //    if (!ModelState.IsValid) return View(cinema);
-        //    await _service.AddAsync(cinema);
-        //    return RedirectToAction("Index");
-        //}
+        [HttpPost]
+        public async Task<IActionResult> Create(NewMovieVM movie)
+        {
+            if (!ModelState.IsValid)
+            {
+                var movieDropdownsData = await _service.GetNewMovieDropdownsValues();
+                ViewBag.Producers = new SelectList(movieDropdownsData.Producers, "Id", "FullName");
+                ViewBag.Cinemas = new SelectList(movieDropdownsData.Cinemas, "Id", "Name");
+                ViewBag.Actors = new SelectList(movieDropdownsData.Actors, "Id", "FullName");
+                return View(movie);
+            }
+            await _service.AddNewMovieAsync(movie);
+            return RedirectToAction("Index");
+        }
 
 
         //Get: Movies/Details/1
