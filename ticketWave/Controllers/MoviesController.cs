@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using ticketWave.Data.Services;
 using ticketWave.Data.ViewModels;
 using ticketWave.Models;
@@ -97,6 +98,20 @@ namespace ticketWave.Controllers
             }
             await _service.UpdateMovieAsync(movie);
             return RedirectToAction("Index");
+        }
+
+        // Filter movies
+        public async Task<IActionResult> Filter(string searchString)
+        {
+            var allMovies = await _service.GetAllAsync(n => n.Cinema);
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                var filteredResult = allMovies.Where(n => n.Name.Contains(searchString) || n.Description.Contains(searchString))
+                    .ToList();
+                return View("Index", filteredResult);
+            }
+
+            return View("Index", allMovies);
         }
     }
 }
