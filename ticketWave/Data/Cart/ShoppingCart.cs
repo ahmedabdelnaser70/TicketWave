@@ -8,12 +8,13 @@ namespace ticketWave.Data.Cart
         public AppDbContext _context { get; set; }
         public string ShoppingCartId { get; set; }
         public List<ShoppingCartItem> ShoppingCartItems { get; set; }
+
         public ShoppingCart(AppDbContext context)
         {
             _context = context;
         }
 
-        // add to cart
+        // Add to cart
         public void AddItemToCart (Movie movie)
         {
             var shoppingCartItem = _context.ShoppingCartItems.FirstOrDefault(n => n.Movie.Id == movie.Id &&
