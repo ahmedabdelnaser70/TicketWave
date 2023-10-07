@@ -13,18 +13,19 @@ namespace ticketWave.Data.Cart
             _context = context;
         }
 
+        // add to cart
         public void AddItemToCart (Movie movie)
         {
             var shoppingCartItem = _context.ShoppingCartItems.FirstOrDefault(n => n.Movie.Id == movie.Id &&
                 n.ShoppingCartId == ShoppingCartId);
 
-            if (shoppingCartItem != null)
+            if (shoppingCartItem == null)
             {
                 shoppingCartItem = new ShoppingCartItem
                 {
                     ShoppingCartId = ShoppingCartId,
                     Movie = movie,
-                    Amount =1
+                    Amount = 1
                 };
 
                 _context.ShoppingCartItems.Add(shoppingCartItem);
@@ -34,6 +35,26 @@ namespace ticketWave.Data.Cart
                 shoppingCartItem.Amount++;
             }
             _context.SaveChanges();   
+        }
+
+         
+        // Remove from cart
+        public void RemoveItemFromCart (Movie movie)
+        {
+            var shoppingCartItem = _context.ShoppingCartItems.FirstOrDefault(n => n.Movie.Id == movie.Id &&
+                n.ShoppingCartId == ShoppingCartId);
+
+            if (shoppingCartItem != null)
+            {
+                if(shoppingCartItem.Amount > 1)  
+                    shoppingCartItem.Amount--; 
+                else
+                {
+                    _context.ShoppingCartItems.Remove(shoppingCartItem);
+                }
+
+            }
+            _context.SaveChanges();
         }
 
         public List<ShoppingCartItem> GetShoppingCartItems()
