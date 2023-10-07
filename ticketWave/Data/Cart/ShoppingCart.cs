@@ -14,6 +14,18 @@ namespace ticketWave.Data.Cart
             _context = context;
         }
 
+
+        public static ShoppingCart GetShoppingCart (IServiceProvider service)
+        {
+            ISession session = service.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
+            var context = service.GetService<AppDbContext>();
+
+            string cartId = session.GetString("CartId") ?? Guid.NewGuid().ToString();
+            session.SetString("CartId", cartId);
+
+            return new ShoppingCart(context) { ShoppingCartId = cartId};
+        }
+
         // Add to cart
         public void AddItemToCart (Movie movie)
         {

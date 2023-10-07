@@ -16,7 +16,7 @@ namespace ticketWave.Controllers
             _shoppingCart = shoppingCart;   
         }
 
-        public IActionResult Index()
+        public IActionResult ShoppingCart()
         {
             var item = _shoppingCart.GetShoppingCartItems();
             _shoppingCart.ShoppingCartItems = item;
