@@ -15,7 +15,7 @@ namespace ticketWave.Data.Cart
         }
 
 
-        public static ShoppingCart GetShoppingCart (IServiceProvider service)
+        public static ShoppingCart GetShoppingCart(IServiceProvider service)
         {
             ISession session = service.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
             var context = service.GetService<AppDbContext>();
@@ -23,11 +23,11 @@ namespace ticketWave.Data.Cart
             string cartId = session.GetString("CartId") ?? Guid.NewGuid().ToString();
             session.SetString("CartId", cartId);
 
-            return new ShoppingCart(context) { ShoppingCartId = cartId};
+            return new ShoppingCart(context) { ShoppingCartId = cartId };
         }
 
         // Add to cart
-        public void AddItemToCart (Movie movie)
+        public void AddItemToCart(Movie movie)
         {
             var shoppingCartItem = _context.ShoppingCartItems.FirstOrDefault(n => n.Movie.Id == movie.Id &&
                 n.ShoppingCartId == ShoppingCartId);
@@ -47,20 +47,20 @@ namespace ticketWave.Data.Cart
             {
                 shoppingCartItem.Amount++;
             }
-            _context.SaveChanges();   
+            _context.SaveChanges();
         }
 
-         
+
         // Remove from cart
-        public void RemoveItemFromCart (Movie movie)
+        public void RemoveItemFromCart(Movie movie)
         {
             var shoppingCartItem = _context.ShoppingCartItems.FirstOrDefault(n => n.Movie.Id == movie.Id &&
                 n.ShoppingCartId == ShoppingCartId);
 
             if (shoppingCartItem != null)
             {
-                if(shoppingCartItem.Amount > 1)  
-                    shoppingCartItem.Amount--; 
+                if (shoppingCartItem.Amount > 1)
+                    shoppingCartItem.Amount--;
                 else
                 {
                     _context.ShoppingCartItems.Remove(shoppingCartItem);
@@ -76,7 +76,7 @@ namespace ticketWave.Data.Cart
                 .Where(n => n.ShoppingCartId == ShoppingCartId).Include(n => n.Movie).ToList());
         }
 
-        public double GetShoppingCartTotal () => _context.ShoppingCartItems.Where(n => n.ShoppingCartId == ShoppingCartId)
+        public double GetShoppingCartTotal() => _context.ShoppingCartItems.Where(n => n.ShoppingCartId == ShoppingCartId)
             .Select(n => n.Movie.Price * n.Amount).Sum();
     }
 }

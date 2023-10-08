@@ -13,7 +13,7 @@ namespace ticketWave.Controllers
         public OrdersController(IMoviesService moviesService, ShoppingCart shoppingCart)
         {
             _moviesService = moviesService;
-            _shoppingCart = shoppingCart;   
+            _shoppingCart = shoppingCart;
         }
 
         public IActionResult ShoppingCart()
