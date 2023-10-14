@@ -6,7 +6,7 @@ namespace ticketWave.Models
     public class Actor :BaseEntity
     {
         [Key]
-        public int Id { get; set; }
+        public new int Id { get; set; }
 
         [Display(Name = "Profile Picture URL")]
         [Required(ErrorMessage = "Profile Picture is required")]
