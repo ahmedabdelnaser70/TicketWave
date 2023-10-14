@@ -330,6 +330,7 @@ namespace ticketWave.Data
 
                 //Users
                 //1- Admin
+
                 var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
                 string adminUserEmail = "admin@wave.com";
 
@@ -344,8 +345,8 @@ namespace ticketWave.Data
                         Email = adminUserEmail,
                         EmailConfirmed = true
                     };
-                    await userManager.CreateAsync(newAdminUser,"Admin123");
-                    await userManager.AddToRoleAsync(newAdminUser,UserRoles.Admin);
+                    await userManager.CreateAsync(newAdminUser, "Admin@123");
+                    await userManager.AddToRoleAsync(newAdminUser, UserRoles.Admin);
                 }
 
                 //2- Normal User
@@ -361,7 +362,7 @@ namespace ticketWave.Data
                         Email = appUserEmail,
                         EmailConfirmed = true
                     };
-                    await userManager.CreateAsync(newAppUser, "User123");
+                    await userManager.CreateAsync(newAppUser, "User@123");
                     await userManager.AddToRoleAsync(newAppUser, UserRoles.User);
                 }
             }
