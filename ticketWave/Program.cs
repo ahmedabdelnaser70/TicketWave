@@ -53,6 +53,7 @@ namespace ticketWave
 
             //Seed database
             AppDbInitializer.Seed(app);
+            AppDbInitializer.SeedUsersAndRolesAsync(app).Wait();
 
             app.Run();
         }
