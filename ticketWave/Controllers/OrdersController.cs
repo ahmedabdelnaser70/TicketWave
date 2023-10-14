@@ -18,6 +18,13 @@ namespace ticketWave.Controllers
             _ordersService = ordersService;
         }
 
+        public async Task<IActionResult> Index()
+        {
+            string usetId = "";
+            var orders = await _ordersService.GetOrdersByUserIdAsync(usetId);
+            return View(orders);
+        }
+
         public IActionResult ShoppingCart()
         {
             var item = _shoppingCart.GetShoppingCartItems();
