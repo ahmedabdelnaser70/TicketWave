@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ticketWave.Data;
+using ticketWave.Data.ViewModels;
 using ticketWave.Models;
 
 namespace ticketWave.Controllers
@@ -21,5 +22,7 @@ namespace ticketWave.Controllers
         {
             return View();
         }
+
+        public IActionResult Login() => View(new LoginVM());
     }
 }
