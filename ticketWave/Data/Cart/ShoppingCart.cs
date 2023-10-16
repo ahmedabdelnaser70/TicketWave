@@ -84,6 +84,9 @@ namespace ticketWave.Data.Cart
             var items = await _context.ShoppingCartItems.Where(n => n.ShoppingCartId == ShoppingCartId).ToListAsync();
             _context.ShoppingCartItems.RemoveRange(items);
             await _context.SaveChangesAsync();
+
+            //to rest the number of items in the same page after buying item
+            ShoppingCartItems = new List<ShoppingCartItem>();
         }
     }
 }
