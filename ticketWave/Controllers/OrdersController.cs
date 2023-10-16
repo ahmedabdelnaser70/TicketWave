@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using ticketWave.Data.Cart;
 using ticketWave.Data.Services;
 using ticketWave.Data.ViewModels;
@@ -20,8 +21,10 @@ namespace ticketWave.Controllers
 
         public async Task<IActionResult> Index()
         {
-            string usetId = "";
-            var orders = await _ordersService.GetOrdersByUserIdAsync(usetId);
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            string userRole = User.FindFirstValue(ClaimTypes.Role);
+
+            var orders = await _ordersService.GetOrdersByUserIdAndRoleAsync(userId, userRole);
             return View(orders);
         }
 
@@ -62,8 +65,8 @@ namespace ticketWave.Controllers
         public async Task<IActionResult> CompleteOrder()
         {
             var item = _shoppingCart.GetShoppingCartItems();
-            string userId = "";
-            string userEmailAddress = "";
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            string userEmailAddress = User.FindFirstValue(ClaimTypes.Email);
 
             await _ordersService.StoreOrderAsync(item, userId, userEmailAddress);
             await _shoppingCart.ClearShoppingCartAsync();
