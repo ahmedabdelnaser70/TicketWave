@@ -1,10 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Data;
 using ticketWave.Data;
 using ticketWave.Data.Services;
+using ticketWave.Data.Static;
 using ticketWave.Models;
 
 namespace ticketWave.Controllers
 {
+    [Authorize(Roles = UserRoles.Admin)]
     public class ActorsController : Controller
     {
         private readonly IActorsService _service;
@@ -12,6 +16,8 @@ namespace ticketWave.Controllers
         {
             _service = service;
         }
+
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var allActors = await _service.GetAllAsync();
@@ -34,6 +40,7 @@ namespace ticketWave.Controllers
 
 
         // Get: Actors/details/1 
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
             if (id is null) return BadRequest();

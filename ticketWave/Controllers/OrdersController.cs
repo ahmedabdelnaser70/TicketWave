@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using ticketWave.Data.Cart;
 using ticketWave.Data.Services;
@@ -6,6 +7,7 @@ using ticketWave.Data.ViewModels;
 
 namespace ticketWave.Controllers
 {
+    [Authorize]
     public class OrdersController : Controller
     {
         private readonly IMoviesService _moviesService;

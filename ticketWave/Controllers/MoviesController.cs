@@ -1,13 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using ticketWave.Data.Services;
+using ticketWave.Data.Static;
 using ticketWave.Data.ViewModels;
 using ticketWave.Models;
 
 namespace ticketWave.Controllers
 {
+    [Authorize(Roles = UserRoles.Admin)]
     public class MoviesController : Controller
     {
         private readonly IMoviesService _service;
@@ -15,6 +18,8 @@ namespace ticketWave.Controllers
         {
             _service = service;
         }
+
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var allMovies = await _service.GetAllAsync(n => n.Cinema);
@@ -48,6 +53,7 @@ namespace ticketWave.Controllers
 
 
         //Get: Movies/Details/1
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
             var moviesDetails = await _service.GetMovieByIdAsync(id);
@@ -101,6 +107,7 @@ namespace ticketWave.Controllers
         }
 
         // Filter movies
+        [AllowAnonymous]
         public async Task<IActionResult> Filter(string searchString)
         {
             var allMovies = await _service.GetAllAsync(n => n.Cinema);
