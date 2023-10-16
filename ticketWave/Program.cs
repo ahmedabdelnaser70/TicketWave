@@ -32,7 +32,17 @@ namespace ticketWave
             builder.Services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
 
             //Authentication & Authorization
-            builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+            {
+                options.Password.RequireDigit = true; // Requires at least one digit
+                options.Password.RequireLowercase = true; // Requires at least one lowercase letter
+                options.Password.RequireUppercase = true; // Requires at least one uppercase letter
+                options.Password.RequireNonAlphanumeric = true; // Requires at least one special character
+                options.Password.RequiredLength = 6; // Minimum password length
+            })
+            .AddEntityFrameworkStores<AppDbContext>()
+            .AddDefaultTokenProviders();
+
             builder.Services.AddMemoryCache();
             builder.Services.AddSession();
             builder.Services.AddAuthentication(option =>

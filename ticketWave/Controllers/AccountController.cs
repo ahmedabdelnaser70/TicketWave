@@ -80,9 +80,20 @@ namespace ticketWave.Controllers
             var newUserResponse = await _userManager.CreateAsync(newUser, registerVM.Password);
 
             if (newUserResponse.Succeeded)
+            {
                 await _userManager.AddToRoleAsync(newUser, UserRoles.User);
+                return View("RegisterCompleted");
+            }
 
-            return View("RegisterCompleted");
+            TempData["Error"] = "invalid password";
+            return View(registerVM);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Movies");
         }
     }
 }
