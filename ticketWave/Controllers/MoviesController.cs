@@ -113,8 +113,10 @@ namespace ticketWave.Controllers
             var allMovies = await _service.GetAllAsync(n => n.Cinema);
             if (!string.IsNullOrEmpty(searchString))
             {
-                var filteredResult = allMovies.Where(n => n.Name.Contains(searchString) || n.Description.Contains(searchString))
-                    .ToList();
+                //var filteredResult = allMovies.Where(n => n.Name.ToLower().Contains(searchString.ToLower()) || n.Description.ToLower().Contains(searchString.ToLower())).ToList();
+                //or
+                var filteredResult = allMovies.Where(n => string.Equals(n.Name,searchString,StringComparison.CurrentCultureIgnoreCase) || string.Equals(n.Description,searchString,StringComparison.CurrentCultureIgnoreCase)).ToList();
+
                 return View("Index", filteredResult);
             }
 
