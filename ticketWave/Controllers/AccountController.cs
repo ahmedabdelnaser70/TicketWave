@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Win32;
 using ticketWave.Data;
 using ticketWave.Data.ViewModels;
 using ticketWave.Models;
@@ -52,7 +53,8 @@ namespace ticketWave.Controllers
 
             TempData["Error"] = "Wrong credentials. Please, try again!";
             return View(loginVM);
-
         }
+
+        public IActionResult Register() => View(new RegisterVM());
     }
 }
