@@ -65,7 +65,6 @@ namespace ticketWave.Data.Cart
                 {
                     _context.ShoppingCartItems.Remove(shoppingCartItem);
                 }
-
             }
             _context.SaveChanges();
         }
